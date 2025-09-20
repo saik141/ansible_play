@@ -1,4 +1,21 @@
 ---
  - hosts: ansible_hosts
    gather_facts: true
-    
+   vars:
+     package: "nginx"
+   tasks:
+     - name: update cache
+       apt:
+         update_cache: yes
+     - name: Install "nginx"
+       apt:
+         name: "{{package}}" 
+     - name: Nginx version
+       shell: >
+         nginx --version
+       register: nginx_version
+
+     - name: Print nginx version
+       debug:
+         msg: "{{nginx_version}}"
+        
