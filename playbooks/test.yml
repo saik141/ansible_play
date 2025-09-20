@@ -1,0 +1,45 @@
+---
+  - hosts: all
+    gather_facts: true
+    vars:
+      version: "1.2.1"
+    tasks:
+      - name: debug
+        debug: 
+          msg: "{{version}}" 
+      
+      - name: shell
+        shell: >
+          echo "Hello
+          ansible"
+        register: output
+
+      - name: pring
+        debug:
+          msg: "{{output}}"
+
+      - name: shell with pipe
+        shell: |
+          echo "Hello
+          devops"
+        register: pipe_output
+
+      - name: print pipe output
+        debug:
+          msg: "{{pipe_output}}"
+         
+      - name: command
+        command: |
+          echo "Hello
+           running shell with command"
+        register: command_output
+      - name: print command
+        debug:
+          msg: "{{command_output}}"
+ 
+      - name: item
+        command: "{{item}}"
+        with_items:
+          - "free -h"
+      - name: raw
+        raw: env
