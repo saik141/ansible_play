@@ -13,7 +13,7 @@
          name: "{{package}}" 
      - name: Nginx version
        shell: >
-         nginx --version
+         nginx -v
        register: nginx_version
 
      - name: Print nginx version
