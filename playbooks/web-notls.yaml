@@ -1,0 +1,30 @@
+---
+ - name: Install Nginx Webserver
+   hosts: ansible_hosts
+   gather_facts: true
+   vars:
+     version: "1.1.2"
+   become: true
+   tasks:
+     - name: Install Nginx
+       apt: >
+         name=nginx
+         update_cache=yes
+     - name: copy nginx config file
+       copy: >
+         src=files/nginx.conf
+         dest=/etc/nginx/sites-available/default
+     - name: enable configuration
+       file: >
+         src=/etc/nginx/sites-enabled/default
+         dest=/etc/nginx/sites-available/default
+         state=link
+     - name: copy index.html
+       template: >
+         src=templates/index.html
+         dest=/usr/share/nginx/html/index.html
+         mode=0644
+     - name: restart nginx
+       service: >
+         name=nginx
+         state=restarted
