@@ -1,3 +1,4 @@
+#!/usr/bin/env ansible-playbook
 ---
  - name: Install Nginx Webserver
    hosts: ansible_hosts
