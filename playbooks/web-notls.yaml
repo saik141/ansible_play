@@ -16,8 +16,8 @@
          dest=/etc/nginx/sites-available/default
      - name: enable configuration
        file: >
-         src=/etc/nginx/sites-enabled/default
-         dest=/etc/nginx/sites-available/default
+         src=/etc/nginx/sites-available/default
+         dest=/etc/nginx/sites-enabled/default
          state=link
      - name: copy index.html
        template: >
